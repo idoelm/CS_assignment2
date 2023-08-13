@@ -10,13 +10,11 @@ namespace Bulls_and_Cows
 {
     internal class Program
     {
-        public static void RunningGame(ref Guess[] io_arrayOfGuesses, ref char[] i_wordOfComputer, int i_numberGuesses,bool o_QuitGame)
+        public static void RunningGame(ref Guess[] io_arrayOfGuesses, ref char[] i_wordOfComputer, int i_numberGuesses,ref bool o_QuitGame)
         {
             string message;
             for (int step = 0; step < i_numberGuesses; step++)
             {
-                Console.WriteLine(i_wordOfComputer);
-
                 PrintBoard(ref io_arrayOfGuesses, i_numberGuesses);
                 Console.WriteLine("Please type your next guess or 'Q' to quit");
                 input:
@@ -136,7 +134,7 @@ namespace Bulls_and_Cows
 
             InitializingGuessArray(ref arrayOfGuesses, numberGuesses);
 
-            RunningGame(ref arrayOfGuesses, ref wordOfComputer, numberGuesses, quitGame);
+            RunningGame(ref arrayOfGuesses, ref wordOfComputer, numberGuesses,ref quitGame);
 
             if (!quitGame)
             {
