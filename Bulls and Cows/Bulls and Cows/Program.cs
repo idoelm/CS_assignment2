@@ -90,8 +90,6 @@ namespace Bulls_and_Cows
 
             numberGuesses++;
 
-            wordOfComputer = new char[4] { 'H', 'D', 'C', 'A' };
-
             InitializingGuessArray(ref arrayOfGuesses, numberGuesses);
 
             for (int step = 0; step < numberGuesses; step++)
