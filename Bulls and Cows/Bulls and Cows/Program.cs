@@ -10,6 +10,29 @@ namespace Bulls_and_Cows
 {
     internal class Program
     {
+        public static void StartGame()
+        {
+
+        }
+        public static bool QuitGame()
+        {
+            char answer; 
+            do
+            {
+                Console.WriteLine("\nWould you like to start a new game? (Y/N)");
+                answer = Console.ReadKey().KeyChar;
+
+                if (answer == 'Y')
+                {
+                    return false;
+                }
+                else if (answer == 'N')
+                {
+                    return true;
+                }
+
+            } while (true);
+        }
         public static void RunningGame(ref Guess[] io_arrayOfGuesses, ref char[] i_wordOfComputer, int i_numberGuesses,ref bool o_QuitGame)
         {
             string message;
@@ -22,7 +45,7 @@ namespace Bulls_and_Cows
                 {
                     case 0:
                         Console.WriteLine("\nBye Bye");
-                        o_QuitGame = true;
+                        Environment.Exit(0);
                         return;
                     case 1:
                         Console.WriteLine("\nInvalid input.\nPlease enter a word containing the letters A - H");
@@ -125,35 +148,18 @@ namespace Bulls_and_Cows
             Guess[] arrayOfGuesses = null;
             char[] wordOfComputer = new char[sizeOfWord];
             bool quitGame = false;
-            char answer;
 
-        start:
-            InitializingWordOfComputer(ref wordOfComputer, sizeOfWord);
-
-            numberGuesses = InitializingNumberGuesses();
-
-            InitializingGuessArray(ref arrayOfGuesses, numberGuesses);
-
-            RunningGame(ref arrayOfGuesses, ref wordOfComputer, numberGuesses,ref quitGame);
-
-            if (!quitGame)
+            do
             {
-                do
-                {
-                    Console.WriteLine("\nWould you like to start a new game? (Y/N)");
-                    answer = Console.ReadKey().KeyChar;
+                InitializingWordOfComputer(ref wordOfComputer, sizeOfWord);
 
-                    if (answer == 'Y')
-                    {
-                        goto start;
-                    }
-                    else if (answer == 'N')
-                    {
-                        quitGame = true;
-                    }
+                numberGuesses = InitializingNumberGuesses();
 
-                } while (!quitGame);
-            }
+                InitializingGuessArray(ref arrayOfGuesses, numberGuesses);
+
+                RunningGame(ref arrayOfGuesses, ref wordOfComputer, numberGuesses, ref quitGame);
+
+            } while (!QuitGame());
         }
     }
 }
