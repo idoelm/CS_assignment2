@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Ex02.ConsoleUtils;
 
@@ -10,9 +11,24 @@ namespace Bulls_and_Cows
 {
     internal class Program
     {
-        public static void StartGame()
+        public static void  Start()
         {
+            int numberGuesses;
+            int sizeOfWord = 4;
+            Guess[] arrayOfGuesses = null;
+            char[] wordOfComputer = new char[sizeOfWord];
 
+            do
+            {
+                InitializingWordOfComputer(ref wordOfComputer, sizeOfWord);
+
+                numberGuesses = InitializingNumberGuesses();
+
+                InitializingGuessArray(ref arrayOfGuesses, numberGuesses);
+
+                RunningGame(ref arrayOfGuesses, ref wordOfComputer, numberGuesses);
+
+            } while (!QuitGame());
         }
         public static bool QuitGame()
         {
@@ -33,7 +49,7 @@ namespace Bulls_and_Cows
 
             } while (true);
         }
-        public static void RunningGame(ref Guess[] io_arrayOfGuesses, ref char[] i_wordOfComputer, int i_numberGuesses,ref bool o_QuitGame)
+        public static void RunningGame(ref Guess[] io_arrayOfGuesses, ref char[] i_wordOfComputer, int i_numberGuesses)
         {
             string message;
             for (int step = 0; step < i_numberGuesses; step++)
@@ -143,23 +159,7 @@ namespace Bulls_and_Cows
         }
         public static void Main()
         {
-            int numberGuesses;
-            int sizeOfWord = 4;
-            Guess[] arrayOfGuesses = null;
-            char[] wordOfComputer = new char[sizeOfWord];
-            bool quitGame = false;
-
-            do
-            {
-                InitializingWordOfComputer(ref wordOfComputer, sizeOfWord);
-
-                numberGuesses = InitializingNumberGuesses();
-
-                InitializingGuessArray(ref arrayOfGuesses, numberGuesses);
-
-                RunningGame(ref arrayOfGuesses, ref wordOfComputer, numberGuesses, ref quitGame);
-
-            } while (!QuitGame());
+            Start();
         }
     }
 }
