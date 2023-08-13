@@ -12,7 +12,6 @@ namespace Bulls_and_Cows
             int sizeOfWord = 4;
             Guess[] arrayOfGuesses = null;
             char[] wordOfComputer = new char[sizeOfWord];
-
             do
             {
                 InitializingWordOfComputer(ref wordOfComputer, sizeOfWord);
