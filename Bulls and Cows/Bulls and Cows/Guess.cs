@@ -1,36 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Bulls_and_Cows
 {
     internal class Guess
     {
-        const int sizeOfWord = 4;
-        char[] myGuess;
-        int numberOfbulls;
-        int numberOfCows;
+        const int k_SizeOfWord = 4;
+        char[] m_MyGuess;
+        int m_NumberOfbulls;
+        int m_NumberOfCows;
 
         public Guess()
         {
-            this.myGuess = new char[sizeOfWord];
-            this.numberOfbulls = 0;
-            this.numberOfCows = 0;  
+            this.m_MyGuess = new char[k_SizeOfWord];
+            this.m_NumberOfbulls = 0;
+            this.m_NumberOfCows = 0;  
         }
         public string MyGuess
         {
             set
             {
-                for (int i = 0; i < sizeOfWord; i++)
+                for (int i = 0; i < k_SizeOfWord; i++)
                 {
-                    myGuess[i] = value[i];
+                    m_MyGuess[i] = value[i];
                 }
             }
             get
             {
-                return new string(myGuess);
+                return new string(m_MyGuess);
             }
         }
 
@@ -38,11 +33,11 @@ namespace Bulls_and_Cows
         {
             get
             {
-                return numberOfCows;
+                return m_NumberOfCows;
             }
             set
             {
-                numberOfCows = value;
+                m_NumberOfCows = value;
             }
         }
 
@@ -50,24 +45,23 @@ namespace Bulls_and_Cows
         {
             get
             {
-                return numberOfbulls;
+                return m_NumberOfbulls;
             }
             set
             {
-                numberOfbulls = value;
+                m_NumberOfbulls = value;
             }
         }
 
         public int InputGuess()
         {
             char letter;
-            for (int i = 0; i < sizeOfWord; i++)
+            for (int i = 0; i < k_SizeOfWord; i++)
             {
                 letter = Console.ReadKey().KeyChar;
                 
                 if (letter == 'Q')
                 {
-
                     return 0;
                 }
                 else if (letter < 'A' || letter  > 'H')
@@ -76,63 +70,56 @@ namespace Bulls_and_Cows
                 }
                 else
                 {
-                    myGuess[i] = letter;
+                    m_MyGuess[i] = letter;
                 }
             }
-
             return 2;
         }
 
         public bool CheckGuess(ref char[] i_WordOfComputer)
         {
-            for (int indexGuessFromPlayer = 0; indexGuessFromPlayer < sizeOfWord; indexGuessFromPlayer++)
+            for (int indexGuessFromPlayer = 0; indexGuessFromPlayer < k_SizeOfWord; indexGuessFromPlayer++)
             {
-                for (int indexWordOfComputer = 0; indexWordOfComputer < sizeOfWord; indexWordOfComputer++)
+                for (int indexWordOfComputer = 0; indexWordOfComputer < k_SizeOfWord; indexWordOfComputer++)
                 {
-                    //Console.WriteLine(myGuess[indexGuessFromPlayer] + "\t" + i_WordOfComputer[indexWordOfComputer]);
-                    if (myGuess[indexGuessFromPlayer] == i_WordOfComputer[indexWordOfComputer])
+                    if (m_MyGuess[indexGuessFromPlayer] == i_WordOfComputer[indexWordOfComputer])
                     {
                         if (indexGuessFromPlayer == indexWordOfComputer)
                         {
-                            numberOfbulls++;
+                            m_NumberOfbulls++;
                         }
                         else
                         {
-                            numberOfCows++;
+                            m_NumberOfCows++;
                         }
                     }
                 }
             }
 
-            if( numberOfbulls == sizeOfWord)
+            if(m_NumberOfbulls == k_SizeOfWord)
             {
                 return true;
             }
-
             return false;   
         }
 
         public string PrintResult()
         {
-            char[] result = new char[sizeOfWord];
+            char[] result = new char[k_SizeOfWord];
             int index = 0;
-            for (int i = 0; i < numberOfbulls;i++, index++)
+            for (int i = 0; i < m_NumberOfbulls; i++, index++)
             {
                 result[index] = 'V';
             }
-            for (int i = 0; i < numberOfCows; i++, index++)
+            for (int i = 0; i < m_NumberOfCows; i++, index++)
             {
                 result[index] = 'X';
             }
-            for (int i = 0; index < (sizeOfWord - numberOfbulls - numberOfCows) ; i++,index++)
+            for (int i = 0; index < (k_SizeOfWord - m_NumberOfbulls - m_NumberOfCows) ; i++,index++)
             {
                 result[index] = ' ';
             }
-
             return new string(result);
         }
-
-
-
     }
 }

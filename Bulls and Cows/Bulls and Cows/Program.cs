@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Ex02.ConsoleUtils;
 
 namespace Bulls_and_Cows
@@ -35,7 +30,8 @@ namespace Bulls_and_Cows
             char answer; 
             do
             {
-                Console.WriteLine("\nWould you like to start a new game? (Y/N)");
+                Console.WriteLine(@"
+Would you like to start a new game? (Y/N)");
                 answer = Console.ReadKey().KeyChar;
 
                 if (answer == 'Y')
@@ -49,38 +45,41 @@ namespace Bulls_and_Cows
 
             } while (true);
         }
-        public static void RunningGame(ref Guess[] io_arrayOfGuesses, ref char[] i_wordOfComputer, int i_numberGuesses)
+        public static void RunningGame(ref Guess[] io_ArrayOfGuesses, ref char[] i_WordOfComputer, int i_NumberGuesses)
         {
             string message;
-            for (int step = 0; step < i_numberGuesses; step++)
+            for (int step = 0; step < i_NumberGuesses; step++)
             {
-                PrintBoard(ref io_arrayOfGuesses, i_numberGuesses);
+                PrintBoard(ref io_ArrayOfGuesses, i_NumberGuesses);
                 Console.WriteLine("Please type your next guess or 'Q' to quit");
                 input:
-                switch (io_arrayOfGuesses[step].InputGuess())
+                switch (io_ArrayOfGuesses[step].InputGuess())
                 {
                     case 0:
-                        Console.WriteLine("\nBye Bye");
+                        Console.WriteLine(@"
+Bye Bye");
                         Environment.Exit(0);
                         return;
                     case 1:
-                        Console.WriteLine("\nInvalid input.\nPlease enter a word containing the letters A - H");
+                        Console.WriteLine(@"
+Invalid input.
+Please enter a word containing the letters A - H");
                         goto input;
                     default:
                         break;
                 }
-                if (io_arrayOfGuesses[step].CheckGuess(ref i_wordOfComputer))
+                if (io_ArrayOfGuesses[step].CheckGuess(ref i_WordOfComputer))
                 {
                     Screen.Clear();
-                    PrintBoard(ref io_arrayOfGuesses, i_numberGuesses);
+                    PrintBoard(ref io_ArrayOfGuesses, i_NumberGuesses);
                     message = string.Format("You guessed after {0} steps!", step + 1);
-                    Console.Write(message);
+                    Console.WriteLine(message);
                     return;
                 }
                 Screen.Clear();
             }
             Screen.Clear();
-            PrintBoard(ref io_arrayOfGuesses, i_numberGuesses);
+            PrintBoard(ref io_ArrayOfGuesses, i_NumberGuesses);
             Console.WriteLine("No more guesses allowed.");
             return;
         }
@@ -88,7 +87,6 @@ namespace Bulls_and_Cows
         {
             int numberGuesses = 0;
             bool validNumberOfAttempts = true;
-
             do
             {
                 Console.WriteLine("Please enter the number of guess attempts (between 4 and 10 attempts)");
@@ -121,7 +119,6 @@ namespace Bulls_and_Cows
                 } 
             }
         }
-
         public static void InitializingGuessArray(ref Guess[] o_ArrayOfGuesses, int i_NumberGuesses)
         {
             o_ArrayOfGuesses = new Guess[i_NumberGuesses];
@@ -134,7 +131,6 @@ namespace Bulls_and_Cows
                 o_ArrayOfGuesses[i] = new Guess();
             }
         }
-
         public static void PrintBoard(ref Guess[] i_ArrayOfGuess, int i_SizeOfAttempts)
         {
             string printLineInChart; 
