@@ -10,34 +10,91 @@ namespace Bulls_and_Cows
 {
     internal class Program
     {
-        public static void InitializingWordOfComputer(ref char[] WordOfComputer, int i_sizeOfWord)
+        public static void RunningGame(ref Guess[] io_arrayOfGuesses, ref char[] i_wordOfComputer, int i_numberGuesses,bool o_QuitGame)
+        {
+            string message;
+            for (int step = 0; step < i_numberGuesses; step++)
+            {
+                Console.WriteLine(i_wordOfComputer);
+
+                PrintBoard(ref io_arrayOfGuesses, i_numberGuesses);
+                Console.WriteLine("Please type your next guess or 'Q' to quit");
+                input:
+                switch (io_arrayOfGuesses[step].InputGuess())
+                {
+                    case 0:
+                        Console.WriteLine("\nBye Bye");
+                        o_QuitGame = true;
+                        return;
+                    case 1:
+                        Console.WriteLine("\nInvalid input.\nPlease enter a word containing the letters A - H");
+                        goto input;
+                    default:
+                        break;
+                }
+                if (io_arrayOfGuesses[step].CheckGuess(ref i_wordOfComputer))
+                {
+                    Screen.Clear();
+                    PrintBoard(ref io_arrayOfGuesses, i_numberGuesses);
+                    message = string.Format("You guessed after {0} steps!", step + 1);
+                    Console.Write(message);
+                    return;
+                }
+                Screen.Clear();
+            }
+            Screen.Clear();
+            PrintBoard(ref io_arrayOfGuesses, i_numberGuesses);
+            Console.WriteLine("No more guesses allowed.");
+            return;
+        }
+        public static int InitializingNumberGuesses()
+        {
+            int numberGuesses = 0;
+            bool validNumberOfAttempts = true;
+
+            do
+            {
+                Console.WriteLine("Please enter the number of guess attempts (between 4 and 10 attempts)");
+                numberGuesses = int.Parse(Console.ReadLine());
+
+                if (numberGuesses < 4 || numberGuesses > 10)
+                {
+                    validNumberOfAttempts = false;
+                }
+
+            } while (!validNumberOfAttempts);
+
+            numberGuesses++;
+            return numberGuesses;
+        }
+        public static void InitializingWordOfComputer(ref char[] o_WordOfComputer, int i_SizeOfWord)
         {
             Random random = new Random();
             int letter;
-            for (int i = 0; i < i_sizeOfWord; i++)
+            for (int i = 0; i < i_SizeOfWord; i++)
             {
                 letter = random.Next(65, 73);
-                if (WordOfComputer.Contains((char)letter))
+                if (o_WordOfComputer.Contains((char)letter))
                 {
                     i--;
                 }
                 else
                 {
-                    WordOfComputer[i] = (char)letter;
+                    o_WordOfComputer[i] = (char)letter;
                 } 
             }
         }
 
-            public static void InitializingGuessArray(ref Guess[] arrayOfGuesses, int i_numberGuesses)
+        public static void InitializingGuessArray(ref Guess[] o_ArrayOfGuesses, int i_NumberGuesses)
         {
-            arrayOfGuesses = new Guess[i_numberGuesses];
+            o_ArrayOfGuesses = new Guess[i_NumberGuesses];
 
-            arrayOfGuesses[0] = new Guess();
-            arrayOfGuesses[0].MyGuess = "####";
+            o_ArrayOfGuesses[0] = new Guess();
+            o_ArrayOfGuesses[0].MyGuess = "####";
 
-            for (int i = 1; i < i_numberGuesses; i++)
+            for (int i = 1; i < i_NumberGuesses; i++)
             {
-                arrayOfGuesses[i] = new Guess();
+                o_ArrayOfGuesses[i] = new Guess();
             }
         }
 
@@ -69,91 +126,36 @@ namespace Bulls_and_Cows
             int sizeOfWord = 4;
             Guess[] arrayOfGuesses = null;
             char[] wordOfComputer = new char[sizeOfWord];
-            bool validNumberOfAttempts = true;
-            string message;
+            bool quitGame = false;
             char answer;
 
-            start:
+        start:
             InitializingWordOfComputer(ref wordOfComputer, sizeOfWord);
 
-            do
-            {
-                Console.WriteLine("Please enter the number of guess attempts (between 4 and 10 attempts)");
-                numberGuesses = int.Parse(Console.ReadLine());
-
-                if (numberGuesses < 4 || numberGuesses > 10)
-                {
-                    validNumberOfAttempts = false;  
-                }
-
-            } while (!validNumberOfAttempts);
-
-            numberGuesses++;
+            numberGuesses = InitializingNumberGuesses();
 
             InitializingGuessArray(ref arrayOfGuesses, numberGuesses);
 
-            for (int step = 0; step < numberGuesses; step++)
+            RunningGame(ref arrayOfGuesses, ref wordOfComputer, numberGuesses, quitGame);
+
+            if (!quitGame)
             {
-                Console.WriteLine(wordOfComputer);
-
-                PrintBoard(ref arrayOfGuesses, numberGuesses);
-                Console.WriteLine("Please type your next guess or 'Q' to quit");
-                input:
-                switch (arrayOfGuesses[step].InputGuess())
+                do
                 {
-                    case 0:
-                        Console.WriteLine("\nBye Bye");
-                        goto end;
-                    case 1:
-                        Console.WriteLine("\nInvalid input.\nPlease enter a word containing the letters A - H");
-                        goto input;
-                    default:
-                        break;
-                }
-                if(arrayOfGuesses[step].CheckGuess(ref wordOfComputer))
-                {
-                    Screen.Clear();
-                    PrintBoard(ref arrayOfGuesses, numberGuesses);
-                    message = string.Format("You guessed after {0} steps!", step+1);
-                    Console.Write(message);
+                    Console.WriteLine("\nWould you like to start a new game? (Y/N)");
+                    answer = Console.ReadKey().KeyChar;
 
-                    do
+                    if (answer == 'Y')
                     {
-                        Console.WriteLine("\nWould you like to start a new game? (Y/N)");
-                        answer = Console.ReadKey().KeyChar;
+                        goto start;
+                    }
+                    else if (answer == 'N')
+                    {
+                        quitGame = true;
+                    }
 
-                        if (answer == 'Y')
-                        {
-                            goto start;
-                        }
-                        else if(answer == 'N')
-                        {
-                            goto end;
-                        }
-
-                    } while (true);
-                   
-                }
-                Screen.Clear();
+                } while (!quitGame);
             }
-
-            do
-            {
-                Console.WriteLine("No more guesses allowed.\nWould you like to start a new game? (Y/N)");
-                answer = Console.ReadKey().KeyChar;
-
-                if (answer == 'Y')
-                {
-                    goto start;
-                }
-                else if (answer == 'N')
-                {
-                    goto end;
-                }
-
-            } while (true);
-
-        end:;
         }
     }
 }
