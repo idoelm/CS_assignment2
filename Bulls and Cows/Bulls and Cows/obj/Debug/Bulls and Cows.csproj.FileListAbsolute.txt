@@ -1,0 +1,10 @@
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\bin\Debug\Bulls and Cows.exe.config
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\bin\Debug\Bulls and Cows.exe
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\bin\Debug\Bulls and Cows.pdb
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\obj\Debug\Bulls and Cows.csproj.AssemblyReference.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\obj\Debug\Bulls and Cows.csproj.SuggestedBindingRedirects.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\obj\Debug\Bulls and Cows.csproj.CoreCompileInputs.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\obj\Debug\Bulls and Cows.exe
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\obj\Debug\Bulls and Cows.pdb
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\bin\Debug\Ex02.ConsoleUtils.dll
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\c#_exe2\CS_assignment2\Bulls and Cows\Bulls and Cows\obj\Debug\Bulls and Cows.csproj.CopyComplete
